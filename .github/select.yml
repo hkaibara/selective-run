@@ -2,6 +2,8 @@ name: "selective"
 
 on:
   push:
+    branches:
+      - test
 
 jobs:
   check:
