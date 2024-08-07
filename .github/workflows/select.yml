@@ -25,7 +25,7 @@ jobs:
           
           echo "========== check paths of modified files =========="
           git diff --name-only HEAD^ HEAD >> files.txt
-          while IFS= read -r file.txt
+          while IFS= read -r file
           do
             echo $file
             if [[ $file != app1/* ]]; then
@@ -35,4 +35,4 @@ jobs:
             else
               echo "::set-output name=run_job::true"
             fi
-          done << files.txt
+          done < files.txt
