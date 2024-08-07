@@ -2,8 +2,6 @@ name: "selective"
 
 on:
   push:
-    branches:
-      - master
 
 jobs:
   check:
