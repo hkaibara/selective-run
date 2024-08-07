@@ -10,25 +10,12 @@ jobs:
   loop:
     strategy:
       matrix:
-        package: ${{fromJson(needs.check_files.GITHUB_OUTPUT.run_job)}}
+        package: ${{ fromJSON(needs.changes.outputs.packages) }}
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 2
-
-      - name: check modified files
-        id: check_files
-        run: |
-          git diff --name-only HEAD^ HEAD >> files.txt
-          while IFS= read -r file
-          do
-            echo "{run_job}={false}" >> $GITHUB_OUTPUT
-          done < files.txt
-
-
-      - name: check modified files
-        run: ${{ tojson(needs) }}
-        shell: cat {0]
+    # output what you want, the output of package B will be available in needs for furture jobs
+    - run: echo "MyKey=MyOutput" > $GITHUB_OUTPUT
+      id: mystep
+      if: matrix.package == 'B' 
+    outputs:
+      B: ${{ steps.mystep.outputs.mykey || '' }}
