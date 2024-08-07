@@ -6,6 +6,12 @@ on:
       - test
 
 jobs:
+
+  loop:
+    strategy:
+      matrix:
+        package: ${{fromJson(needs.check_files.GITHUB_OUTPUT.run_job)}}
+
   check:
     name: Check files
 
@@ -26,13 +32,21 @@ jobs:
           git diff --name-only HEAD^ HEAD >> files.txt
           while IFS= read -r file
           do
-            echo $file
-            if [[ $file != app1/* ]]; then
-              echo "This modified file is not under the 'db' folder."
-
-              echo "{run_job}={false}" >> $GITHUB_OUTPUT
-              break
-            else
-              echo "{run_job}={true}" >> $GITHUB_OUTPUT
-            fi
+            echo "{run_job}={false}" >> $GITHUB_OUTPUT
           done < files.txt
+
+          # do
+          #   echo $file
+          #   if [[ $file != app1/* ]]; then
+          #     echo "This modified file is not under the 'db' folder."
+
+          #     echo "{run_job}={false}" >> $GITHUB_OUTPUT
+          #     break
+          #   else
+          #     echo "{run_job}={true}" >> $GITHUB_OUTPUT
+          #   fi
+          # done < files.txt
+
+      - name: check modified files
+        run: ${{ tojson(needs) }}
+        shell: cat {0]
