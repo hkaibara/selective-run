@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-env-vars
+data:
+  env_var1: default_var2
+  env_var2: default_var2
