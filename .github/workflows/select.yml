@@ -42,7 +42,7 @@ jobs:
       matrix: 
         package: ${{ fromJson(needs.check.outputs.matrix) }}
     steps:
-      - run: echo this
+      - run: echo running for ${{matrix.package.path}}
 
 
 
