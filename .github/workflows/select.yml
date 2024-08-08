@@ -52,6 +52,7 @@ jobs:
       - name: check file and build
         run: |
           cd ${{matrix.package.path}}
+          pwd
           ls
           if ${{ hashFiles('Dockerfile') != '' }}; then
             docker build -t image-name:${{ github.sha }} .
