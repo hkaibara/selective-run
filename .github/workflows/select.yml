@@ -49,11 +49,11 @@ jobs:
       - name: directory
         run: echo running for ${{matrix.package.path}}
 
-      - name: check file
+      - name: check file and build
         run: |
+          cd ${{matrix.package.path}}
           ls
           if ${{ hashFiles('Dockerfile') != '' }}; then
-            cd ${{matrix.package.path}}
             docker build -t image-name:${{ github.sha }} .
             break
           else
