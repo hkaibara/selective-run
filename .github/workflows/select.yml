@@ -25,19 +25,23 @@ jobs:
       - name: check modified files
         id: check_files
         run: |
-          echo "=============== list modified files ==============="
-          git diff --name-only HEAD^ HEAD
-          
           echo "========== check paths of modified files =========="
           git diff --dirstat=files,0 HEAD~1 | sed 's/^[ 0-9.]\+% //g' >> out.txt
           cat out.txt
-          while IFS= read -r file
-          do
-            echo "{run_job}={false}" >> $GITHUB_OUTPUT
-            echo $GITHUB_OUTPUT
-          done < out.txt
+
+          jq -Rs '[ split("\n")[] | split("\r")[] | select(length > 0) ]' out.txt >> out.json
+
+          cat out.json
 
 
+
+
+          # while IFS= read -r file
+
+          # do
+          #   echo "{run_job}={false}" >> $GITHUB_OUTPUT
+
+          # done < out.txt
 
           # do
           #   echo $file
