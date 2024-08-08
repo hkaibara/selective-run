@@ -11,4 +11,4 @@ patches:
 images:
 - name: app-test
   newName: 214084917052.dkr.ecr.ap-northeast-1.amazonaws.com/app-test
-  newTag: a01d1a483ebac04562d7c5621b758c0330772b90
+  newTag: a01d1a483ebac04562d7c5621b758c0330772b90test
