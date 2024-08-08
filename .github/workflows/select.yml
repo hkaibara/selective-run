@@ -24,7 +24,7 @@ jobs:
           cat out.txt
           ls -al
 
-          jq -Rs '[ split("\n")[] | split("\r")[] | select(length > 0) | split(",") |{path: .[0]} ]' out.txt
+          jq -Rs '[ split("\n")[] | split("\r")[] | select(length > 0) | split(",") |{path: .[0]} ]' out.txt >> out.json
           cat out.json
 
   configure:
