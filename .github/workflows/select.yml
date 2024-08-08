@@ -39,9 +39,10 @@ jobs:
     runs-on: ubuntu-latest
     needs: check
     strategy:
-      matrix: ${{ fromJson(needs.check.outputs.matrix) }}
+      matrix: 
+        package: ${{ fromJson(needs.check.outputs.matrix) }}
     steps:
-      - run: echo ${{ matrix.path }}
+      - run: echo this
 
 
 
