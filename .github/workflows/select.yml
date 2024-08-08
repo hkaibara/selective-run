@@ -35,14 +35,25 @@ jobs:
           ls
           echo "matrix=$(jq -c . < ./out.json)" >> $GITHUB_OUTPUT
 
-  print:
+  build:
     runs-on: ubuntu-latest
     needs: check
     strategy:
       matrix: 
         package: ${{ fromJson(needs.check.outputs.matrix) }}
     steps:
-      - run: echo running for ${{matrix.package.path}}
+      - name: directory
+        run: echo running for ${{matrix.package.path}}
+
+      - name: check file
+        run: |
+          if ${{ hashFiles('kustomization.yaml') != '' }}; then
+            echo "File exists"
+            break
+          else
+            echo "File not found"
+          fi
+
 
 
 
