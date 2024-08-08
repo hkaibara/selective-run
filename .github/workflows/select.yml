@@ -47,6 +47,7 @@ jobs:
 
       - name: check file
         run: |
+          ls
           if ${{ hashFiles('kustomization.yaml') != '' }}; then
             echo "File exists"
             break
