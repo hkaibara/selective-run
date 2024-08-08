@@ -30,6 +30,7 @@ jobs:
           
           echo "========== check paths of modified files =========="
           git diff --dirstat=files,0 HEAD~1 | sed 's/^[ 0-9.]\+% //g' >> files.txt
+          cat files.txt
           while IFS= read -r file
           do
             echo "{run_job}={false}" >> $GITHUB_OUTPUT
