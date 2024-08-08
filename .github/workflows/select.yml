@@ -22,12 +22,14 @@ jobs:
           echo "========== check paths of modified files =========="
           git diff --dirstat=files,0 HEAD~1 | sed 's/^[ 0-9.]\+% //g' >> out.txt
           cat out.txt
+          ls -al
 
           jq -Rs '[ split("\n")[] | split("\r")[] | select(length > 0) | split(",") |{path: .[0]} ]' out.txt
           cat out.json
 
   configure:
     runs-on: ubuntu-latest
+    needs: check
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
