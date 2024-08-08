@@ -14,7 +14,7 @@ jobs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 2
 
@@ -42,6 +42,10 @@ jobs:
       matrix: 
         package: ${{ fromJson(needs.check.outputs.matrix) }}
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
       - name: directory
         run: echo running for ${{matrix.package.path}}
 
