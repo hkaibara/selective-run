@@ -54,7 +54,7 @@ jobs:
           cd ${{matrix.package.path}}
           pwd
           ls
-          if ${{ hashFiles('Dockerfile') != '' }}; then
+          if [ -f ${{matrix.package.path}}/Dockerfile]; then
             docker build -t image-name:${{ github.sha }} .
             break
           else
