@@ -33,7 +33,7 @@ jobs:
           while IFS= read -r file
           do
             echo "{run_job}={false}" >> $GITHUB_OUTPUT
-            echo &GITHUB_OUTPUT
+            echo $GITHUB_OUTPUT
           done < files.txt
 
 
