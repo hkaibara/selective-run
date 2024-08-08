@@ -29,7 +29,7 @@ jobs:
           git diff --name-only HEAD^ HEAD
           
           echo "========== check paths of modified files =========="
-          git diff --name-only HEAD^ HEAD >> files.txt
+          git diff --dirstat=files,0 HEAD~1 | sed 's/^[ 0-9.]\+% //g' >> files.txt
           while IFS= read -r file
           do
             echo "{run_job}={false}" >> $GITHUB_OUTPUT
