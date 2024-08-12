@@ -53,7 +53,14 @@ jobs:
         run: |
           [ -d "${{matrix.package.path}}" ] && cd ${{matrix.package.path}} || exit 1
           pwd
-          # ls
+          ls
+          if [ -f Dockerfile ]; then
+            docker build -t image-name:${{ github.sha }} .
+          else
+            echo "File does not exist."
+          fi
+
+
           # if [ -f ${{matrix.package.path}}Dockerfile ]; then
           #  docker build -t image-name:${{ github.sha }} .
           #   break
