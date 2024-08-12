@@ -51,11 +51,12 @@ jobs:
 
       - name: check file and build
         run: |
+          [ -d "${{matrix.package.path}}" ] && cd ${{matrix.package.path}} || exit 1
           cd ${{matrix.package.path}}
-          # pwd
+          pwd
           # ls
           # if [ -f ${{matrix.package.path}}Dockerfile ]; then
-            docker build -t image-name:${{ github.sha }} .
+          #  docker build -t image-name:${{ github.sha }} .
           #   break
           # else
           #   echo "File not found"
