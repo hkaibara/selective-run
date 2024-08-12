@@ -51,7 +51,7 @@ jobs:
 
       - name: check file and build
         run: |
-          [ -d "${{matrix.package.path}}" ] && cd ${{matrix.package.path}} || exit 1
+          [ -d "${{matrix.package.path}}" ] && cd ${{matrix.package.path}} || echo "Directory does not exist / might have been removed."
           pwd
           ls
           if [ -f Dockerfile ]; then
