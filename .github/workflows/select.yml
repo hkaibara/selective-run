@@ -59,11 +59,3 @@ jobs:
           else
             echo "File does not exist."
           fi
-
-
-          # if [ -f ${{matrix.package.path}}Dockerfile ]; then
-          #  docker build -t image-name:${{ github.sha }} .
-          #   break
-          # else
-          #   echo "File not found"
-          # fi
